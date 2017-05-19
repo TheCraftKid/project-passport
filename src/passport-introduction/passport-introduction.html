@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="passport-introduction">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `passport-introduction`
+     * An overlay that introduces a user to the passport
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PassportIntroduction extends Polymer.Element {
+      static get is() { return 'passport-introduction'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'passport-introduction'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PassportIntroduction.is, PassportIntroduction);
+  </script>
+</dom-module>

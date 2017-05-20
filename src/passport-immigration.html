@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="passport-immigration">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `passport-immigration`
+     * A page showing immigration content
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PassportImmigration extends Polymer.Element {
+      static get is() { return 'passport-immigration'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'passport-immigration'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PassportImmigration.is, PassportImmigration);
+  </script>
+</dom-module>

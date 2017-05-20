@@ -10,105 +10,111 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="generator" content="Polymer Starter Kit">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>Rome Passport</title>
-    <meta name="description" content="Your passport to being a Roman citizen">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Polymer Starter Kit">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <!--
+  <title>Rome Passport</title>
+  <meta name="description" content="Your passport to being a Roman citizen">
+
+  <!--
       If deploying to a non-root path, replace href="/" with the full path to the project root.
       For example: href="/polymer-starter-kit/relative-path-example/"
     -->
-    <base href="/">
+  <base href="/">
 
-    <link rel="icon" href="images/favicon.ico">
+  <link rel="icon" href="images/favicon.ico">
 
-    <!-- See https://goo.gl/OOhYW5 -->
-    <link rel="manifest" href="manifest.json">
+  <!-- See https://goo.gl/OOhYW5 -->
+  <link rel="manifest" href="manifest.json">
 
-    <!-- See https://goo.gl/qRE0vM -->
-    <meta name="theme-color" content="#D32F2F">
+  <!-- See https://goo.gl/qRE0vM -->
+  <meta name="theme-color" content="#D32F2F">
 
-    <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Roman Passport">
+  <!-- Add to homescreen for Chrome on Android. Fallback for manifest.json -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Roman Passport">
 
-    <!-- Add to homescreen for Safari on iOS -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Roman Passport">
+  <!-- Add to homescreen for Safari on iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Roman Passport">
 
-    <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
+  <!-- Homescreen icons -->
+  <link rel="apple-touch-icon" href="images/manifest/icon-48x48.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="images/manifest/icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="96x96" href="images/manifest/icon-96x96.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="images/manifest/icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="images/manifest/icon-192x192.png">
 
-    <!-- Tile icon for Windows 8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#3f51b5">
-    <meta name="msapplication-tap-highlight" content="no">
+  <!-- Tile icon for Windows 8 (144x144 + tile color) -->
+  <meta name="msapplication-TileImage" content="images/manifest/icon-144x144.png">
+  <meta name="msapplication-TileColor" content="D32F2F">
+  <meta name="msapplication-tap-highlight" content="no">
 
-    <script>
-      // Register the base URL
-      const baseUrl = document.querySelector('base').href;
+  <script>
+    // Register the base URL
+    const baseUrl = document.querySelector('base').href;
 
-      // Load and register pre-caching Service Worker
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register(baseUrl + 'service-worker.js');
-        });
-      }
-    </script>
+    // Load and register pre-caching Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register(baseUrl + 'service-worker.js');
+      });
+    }
+  </script>
 
-    <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
-    <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+  <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
+  <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
-    <!-- Load your application shell -->
-    <link rel="import" href="src/my-app.html">
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/4.0.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/4.0.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/4.0.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/4.0.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/4.0.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/4.0.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/4.0.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/4.0.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/4.0.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/4.0.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+  <!-- Load your application shell -->
+  <link rel="import" href="src/passport-app.html">
 
-    <!-- Add any global styles for body, document, etc. -->
-    <style>
-      body {
-        margin: 0;
-        font-family: 'Roboto', 'Noto', sans-serif;
-        line-height: 1.5;
-        min-height: 100vh;
-        background-color: #eeeeee;
-      }
-    </style>
-  </head>
-  <body>
-    <my-app></my-app>
-    <noscript>
-      Please enable JavaScript to view this website.
-    </noscript>
-    <!-- Built with love using Polymer Starter Kit -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('data', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+  <!-- Add any global styles for body, document, etc. -->
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Crimson+Text');
+    body {
+      margin: 0;
+      font-family: 'Crimson Text', serif, 'Roboto', 'Noto', sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      background-color: #eeeeee;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Shortcut at https://goo.gl/dOUb0P -->
+  <passport-app></passport-app>
+  <noscript id="noscript-notifier">
+    Please enable JavaScript to view this website.
+  </noscript>
+  <!-- Built with love using Polymer Starter Kit -->
+  <script>
+    // Will work if we actually enable JavaScript
+    document.getElementById('noscript-notifier').remove();
+      // document.addEventListener('DOMContentLoaded', () => {
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+      // // The Firebase SDK is initialized and available here!
+      //
+      // firebase.auth().onAuthStateChanged(user => { });
+      // firebase.database().ref('/path/to/ref').on('data', snapshot => { });
+      // firebase.messaging().requestPermission().then(() => { });
+      // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+      //
+      // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
 
       //   try {
       //     let app = firebase.app();
@@ -119,6 +125,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       //     document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
       //   }
       // });
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

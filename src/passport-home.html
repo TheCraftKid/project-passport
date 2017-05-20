@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
+<link rel="import" href="passport-introduction.html">
+
+<dom-module id="passport-home">
+<template>
+  <style>
+     :host {
+      display: block;
+    }
+  </style>
+  <passport-introduction id="introduction" invisible></passport-introduction>
+</template>
+
+<script>
+  /**
+     * `passport-home`
+     * The home screen for the passport
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+  class PassportHome extends Polymer.Element {
+    static get is() { return 'passport-home'; }
+    static get properties() {
+      return {
+        prop1: {
+          type: String,
+          value: 'passport-home'
+        },
+        onboarded: {
+          type: Boolean,
+          value: false
+        }
+      };
+    }
+
+    showPassportIntroduction() {
+
+    }
+  }
+
+  window.customElements.define(PassportHome.is, PassportHome);
+</script>
+</dom-module>

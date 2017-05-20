@@ -1,13 +1,18 @@
-<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/marked-element/marked-element.html">
 
-<dom-module id="passport-introduction">
+<dom-module id="passport-economy">
   <template>
     <style>
       :host {
         display: block;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <marked-element>
+      <div class="markdown-html"></div>
+      <script type="text/markdown" src="src/content/economy.md"></script>
+    </marked-element>
   </template>
 
   <script>
@@ -23,9 +28,8 @@
       static get is() { return 'passport-introduction'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'passport-introduction'
+          mode: {
+
           }
         };
       }

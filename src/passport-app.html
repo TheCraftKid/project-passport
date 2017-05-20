@@ -1,13 +1,3 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
@@ -18,22 +8,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/bottom-nav/bottom-nav.html">
-<link rel="import" href="my-icons.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 
-<link rel="lazy-import" href="my-view1.html">
-<link rel="lazy-import" href="my-view2.html">
-<link rel="lazy-import" href="my-view3.html">
-<link rel="lazy-import" href="my-view404.html">
+<!-- Project elements -->
+<link rel="import" href="passport-home.html">
+<link rel="import" href="passport-immigration.html">
 
-<dom-module id="my-app">
+<dom-module id="passport-app">
   <template>
     <style>
        :host {
         --app-primary-color: #D32F2F;
         --app-secondary-color: #FF6E40;
+        --app-drawer-width: 300px;
 
         display: block;
       }
@@ -77,9 +68,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer id="drawer" slot="drawer">
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="view1">Immigration</a>
-          <a name="view2" href="view2">View Two</a>
-          <a name="view3" href="view3">View Three</a>
+          <a name="home" href="home">Home</a>
+          <a name="immigration" href="immigration">Immigration</a>
+          <a name="welfare" href="welfare">Welfare</a>
         </iron-selector>
       </app-drawer>
 
@@ -88,35 +79,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
-            <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
+            <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <div main-title>Roman Passport</div>
           </app-toolbar>
+          <paper-tabs selected="{{page}}" attr-for-selected="name" scrollable>
+            <paper-tab name="home" selected>Home</paper-tab>
+            <paper-tab name="immigration">Immigration</paper-tab>
+            <paper-tab name="economy">Economy</paper-tab>
+          </paper-tabs>
         </app-header>
 
-        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="view404" role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
-          <my-view404 name="view404"></my-view404>
+        <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
+          <passport-home name="home"></passport-home>
+          <passport-home name="immigration"></passport-home>
+          <passport-home name="economy"></passport-home>
         </iron-pages>
       </app-header-layout>
 
-      <bottom-nav shadow>
-        <bottom-toolbar selected="0">
-          <bottom-tab selected-class="grey" label="Movies & TV" icon="notification:ondemand-video"></bottom-tab>
-          <bottom-tab selected-class="green" label="Music" icon="image:music-note"></bottom-tab>
-          <bottom-tab selected-class="brown" label="Books" icon="icons:book"></bottom-tab>
-          <bottom-tab selected-class="darkbrown" label="Newstand" icon="av:web"></bottom-tab>
-        </bottom-toolbar>
-      </bottom-nav>
     </app-drawer-layout>
+
   </template>
 
   <script>
-    class MyApp extends Polymer.Element {
-
-      static get is() { return 'my-app'; }
-
+    /**
+     * `passport-app`
+     * The app&#39;s primary element
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PassportApp extends Polymer.Element {
+      static get is() { return 'passport-app'; }
       static get properties() {
         return {
           page: {
@@ -127,12 +121,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           rootPattern: String,
           routeData: Object,
           subroute: String,
+          selectedTab: {
+            type: Object,
+            observer: '_tabChanged'
+          }
         };
       }
 
       static get observers() {
         return [
           '_routePageChanged(routeData.page)',
+
         ];
       }
 
@@ -153,7 +152,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         // If no page was found in the route data, page will be an empty string.
         // Deault to 'view1' in that case.
-        this.page = page || 'view1';
+        this.page = page || 'home';
 
         // Close a non-persistent drawer when the page & route are changed.
         if (!this.$.drawer.persistent) {
@@ -163,19 +162,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _pageChanged(page) {
         // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
         Polymer.importHref(
-          resolvedPageUrl,
+          this.resolveUrl('passport-' + page + '.html'),
           null,
           this._showPage404.bind(this),
           true);
       }
 
+
       _showPage404() {
-        this.page = 'view404';
+        this.page = '404';
       }
     }
 
-    window.customElements.define(MyApp.is, MyApp);
+    window.customElements.define(PassportApp.is, PassportApp);
   </script>
 </dom-module>

@@ -7,6 +7,9 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-document.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-conflict-resolution.html">
+<link rel="import" href="../bower_components/app-pouchdb/app-pouchdb-query.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
@@ -15,8 +18,11 @@
 <link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 
 <!-- Project elements -->
+<link rel="import" href="passport-introduction.html">
 <link rel="import" href="passport-home.html">
 <link rel="import" href="passport-immigration.html">
+<link rel="import" href="passport-economy.html">
+<link rel="import" href="passport-about.html">
 
 <dom-module id="passport-app">
   <template>
@@ -63,6 +69,12 @@
     <app-location route="{{route}}"></app-location>
     <app-route route="{{route}}" pattern="[[rootPattern]]:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
+    <app-pouchdb-document db-name="app-data" doc-id="states" data="{{onboarded}}"></app-pouchdb-document>
+
+    <passport-introduction id="introduction" fit-into="home-root" hidden="{{onboarded}}"></passport-introduction>
+
+    <passport-about id="about"></passport-about>
+
     <app-drawer-layout fullbleed>
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer">
@@ -70,7 +82,8 @@
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
           <a name="home" href="home">Home</a>
           <a name="immigration" href="immigration">Immigration</a>
-          <a name="welfare" href="welfare">Welfare</a>
+          <a name="economy" href="economy">Economy</a>
+          <a name="about" href="about">About</a>
         </iron-selector>
       </app-drawer>
 
@@ -80,9 +93,9 @@
         <app-header slot="header" condenses reveals effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>Roman Passport</div>
+            <div main-title>Government of the Roman Empire</div>
           </app-toolbar>
-          <paper-tabs selected="{{page}}" attr-for-selected="name" scrollable>
+          <paper-tabs selected="{{page}}" attr-for-selected="name" scrollable sticky>
             <paper-tab name="home" selected>Home</paper-tab>
             <paper-tab name="immigration">Immigration</paper-tab>
             <paper-tab name="economy">Economy</paper-tab>
@@ -90,9 +103,9 @@
         </app-header>
 
         <iron-pages selected="[[page]]" attr-for-selected="name" fallback-selection="404" role="main">
-          <passport-home name="home"></passport-home>
-          <passport-home name="immigration"></passport-home>
-          <passport-home name="economy"></passport-home>
+          <passport-home name="home" selected></passport-home>
+          <passport-immigration name="immigration"></passport-immigration>
+          <passport-economy name="economy"></passport-economy>
         </iron-pages>
       </app-header-layout>
 
@@ -121,9 +134,9 @@
           rootPattern: String,
           routeData: Object,
           subroute: String,
-          selectedTab: {
-            type: Object,
-            observer: '_tabChanged'
+          onboarded: {
+            type: Boolean,
+            reflectToAttribute: false,
           }
         };
       }
@@ -151,7 +164,7 @@
         }
 
         // If no page was found in the route data, page will be an empty string.
-        // Deault to 'view1' in that case.
+        // Deault to 'home' in that case.
         this.page = page || 'home';
 
         // Close a non-persistent drawer when the page & route are changed.
@@ -161,12 +174,17 @@
       }
 
       _pageChanged(page) {
-        // Load page import on demand. Show 404 page if fails
-        Polymer.importHref(
-          this.resolveUrl('passport-' + page + '.html'),
-          null,
-          this._showPage404.bind(this),
-          true);
+        // Special case because this is a dialog
+        if (page === 'about') {
+          this.$.about.show();
+        } else {
+          // Load page import on demand. Show 404 page if fails
+          Polymer.importHref(
+            this.resolveUrl('passport-' + page + '.html'),
+            null,
+            this._showPage404.bind(this),
+            true);
+        }
       }
 
 

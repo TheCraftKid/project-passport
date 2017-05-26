@@ -1,6 +1,6 @@
 {
-  "name": "Roman Passport",
-  "short_name": "Passport",
+  "name": "Rome Website",
+  "short_name": "Rome",
   "start_url": "./?homescreen=1",
   "display": "standalone",
   "theme_color": "#D32F2F",

@@ -1,13 +1,62 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <dom-module id="passport-immigration">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
+        padding: 0px 16px 16px 16px;
+      }
+
+      paper-button {
+        background-color: var(--app-secondary-color);
+      }
+
+      .root {
+        margin: auto;
+      }
+
+      .content-container-1 {
+        display: flex;
+        flex-direction: column;
+      }
+
+      img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 90%;
+        margin: 20px auto;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+    <div class="root">
+      <h2>Immigrate to Rome</h2>
+      <p>You will have immense opportunity in Rome. Not only will you live in peace, but you will be able to keep your culture.</p>
+      <h1>Rights as a Citizen</h1>
+      <ul>
+        <li>The right to vote</li>
+        <li>The right to run for office</li>
+        <ul><em>However, in order to preserve the stablility of the empire, freed slaves are prohibited from becoming emperor.</em></p>
+        </ul>
+        <li>The right to marry</li>
+        <li>The right to maintain citizenship when moving</li>
+        <li>The right to sue</li>
+        <li>The right to be sued</li>
+        <li>The right to not be whipped or tortured</li>
+        <ul><em>This does not apply to those convicted of treason.</em></p>
+        </ul>
+      </ul>
+      <div class="content-container-1">
+        <img src="/images/content/gothic_tribe.jpg"></iron-image>
+      </div>
+      <span style="display: inline-block">
+        <paper-button style="margin-top: 8px;">Join the empire</paper-button>
+        </span>
+    </div>
   </template>
 
   <script>
@@ -17,16 +66,12 @@
      *
      * @customElement
      * @polymer
-     * @demo demo/index.html
      */
     class PassportImmigration extends Polymer.Element {
       static get is() { return 'passport-immigration'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'passport-immigration'
-          }
+          user: Object
         };
       }
     }

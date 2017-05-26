@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+
+<dom-module id="passport-image-carousel">
+  <template>
+    <style>
+      iron-image {
+        margin: 8px;
+        width: 144px;
+        height: 144px;
+      }
+
+      .image-caption {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+    </style>
+    <tempate is="dom-repeat" items="{{images}}" as="image">
+      <!--TODO: Implement placeholder -->
+      <iron-image src="[[image.src]]" sizing="cover" preload></iron-image>
+      <div class="image-caption">[[image.caption]]</div>
+    </tempate>
+  </template>
+  <script>
+    /**
+       * `passport-image-carousel`
+       * A carousel that contains images for the passport
+       *
+       * @customElement
+       * @polymer
+       */
+    class PassportImageCarousel extends Polymer.Element {
+      static get is() { return 'passport-image-carousel'; }
+      static get properties() {
+        return {
+          images: Array,
+        };
+      }
+    }
+
+    window.customElements.define(PassportImageCarousel.is, PassportImageCarousel);
+  </script>
+</dom-module>

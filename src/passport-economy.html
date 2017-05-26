@@ -1,40 +1,60 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 <dom-module id="passport-economy">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
+      }
+
+      .root {
+        margin: 16px;
+      }
+
+      img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 90%;
+        margin: 20px auto;
       }
     </style>
 
-    <marked-element>
-      <div class="markdown-html"></div>
-      <script type="text/markdown" src="src/content/economy.md"></script>
-    </marked-element>
+    <div class="root">
+      <h1>Now</h1>
+      <div>
+        <h2>Coinage</h2>
+        <p>The denarius is the official Rome coin.</p>
+        <p>It contains <b>immense</b> amounts of silver, and is the recommended way to pay for goods throughout the empire.</p>
+        <p><em>Note: use of any other coinage is punishable under law.</em></p>
+        <p><em>Note: Taxes cannot be paid in the denarius.</em></p>
+        <img src="/images/content/denarius_coin.jpg"></iron-image>
+      </div>
+      <!--<div>
+        <h1>Business</h1>
+        <p>Due to government for 
+      </div>-->
   </template>
 
   <script>
     /**
-     * `passport-introduction`
-     * An overlay that introduces a user to the passport
+     * `passport-economy`
+     * An overlay that introduces a user to the economy of the Roman empire
      *
      * @customElement
      * @polymer
-     * @demo demo/index.html
      */
-    class PassportIntroduction extends Polymer.Element {
-      static get is() { return 'passport-introduction'; }
+    class PassportEconomy extends Polymer.Element {
+      static get is() { return 'passport-economy'; }
       static get properties() {
         return {
-          mode: {
-
-          }
         };
       }
     }
 
-    window.customElements.define(PassportIntroduction.is, PassportIntroduction);
+    window.customElements.define(PassportEconomy.is, PassportEconomy);
   </script>
 </dom-module>

@@ -1,9 +1,14 @@
 {
   "entrypoint": "index.html",
-  "shell": "src/passport-app/passport-app.html",
+  "shell": "src/passport-app.html",
   "fragments": [
-    "src/passport-home/passport-home.html",
-    "src/passport-introduction/passport-introduction.html"
+    "src/passport-home.html",
+    "src/passport-introduction.html",
+    "src/passport-404.html",
+    "src/passport-economy.html",
+    "src/passport-news.html",
+    "src/passport-immigration.html",
+    "src/passport-culture.html"
   ],
   "sources": [
     "src/**/*",
@@ -21,7 +26,7 @@
   },
   "builds": [
     {
-      "preset": "es5-bundled"
+      "preset": "es6-bundled"
     }
   ]
 }

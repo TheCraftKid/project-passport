@@ -1,5 +1,8 @@
 {
-  "extends": ["eslint:recommended", "google"],
+  "extends": [
+    "eslint:recommended",
+    "google"
+  ],
   "parserOptions": {
     "ecmaVersion": 6
   },
@@ -10,8 +13,17 @@
     "html"
   ],
   "rules": {
+    "no-undef": "warn",
+    "no-console": "off",
     "brace-style": "off",
-    "new-cap": ["error", { "capIsNewExceptions": ["Polymer"] }],
+    "new-cap": [
+      "error",
+      {
+        "capIsNewExceptions": [
+          "Polymer"
+        ]
+      }
+    ],
     "no-var": "off",
     "require-jsdoc": "off"
   },

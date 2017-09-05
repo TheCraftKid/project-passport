@@ -1,15 +1,25 @@
 {
-  "name": "polymer-starter-kit",
-  "license": "BSD-3-Clause",
+  "name": "project-passport",
+  "author": "Willie Chalmers III",
+  "license": "MIT",
+  "version": "1.0.0",
+  "description": "An extensible framework for interactive presentation of unit reviews.",
   "devDependencies": {
+    "bower": "^1.8.0",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0"
+    "eslint-plugin-html": "^2.0.0",
+    "firebase-tools": "^3.10.0",
+    "polymer-cli": "^1.5.4"
   },
   "scripts": {
-    "lint": "npm run lint:javascript",
-    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
-    "test": "polymer test",
-    "test:integration": "polymer build # test that psk builds without error with the CLI"
+    "install": "./node_modules/.bin/bower install",
+    "start": "yarn run build && ./node_modules/.bin/firebase serve",
+    "lint": "yarn run lint:javascript",
+    "lint:javascript": "./node_modules/.bin/eslint . --ext js,html --ignore-path .gitignore",
+    "test": "./node_modules/.bin/polymer test",
+    "test:integration": "yarn run build # test that psk builds without error with the CLI",
+    "build": "./node_modules/.bin/polymer build",
+    "deploy": "yarn run build && ./node_modules/.bin/firebase deploy --only hosting"
   }
 }

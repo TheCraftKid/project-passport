@@ -4,22 +4,35 @@
   "license": "MIT",
   "version": "1.0.0",
   "description": "An extensible framework for interactive presentation of unit reviews.",
+  "dependencies": {
+    "quizlet-node": "file:../quizlet-node"
+  },
   "devDependencies": {
     "bower": "^1.8.0",
     "eslint": "^3.19.0",
     "eslint-config-google": "^0.7.0",
     "eslint-plugin-html": "^2.0.0",
     "firebase-tools": "^3.10.0",
+    "npm-watch": "^0.2.0",
     "polymer-cli": "^1.5.4"
   },
   "scripts": {
-    "install": "./node_modules/.bin/bower install",
-    "start": "yarn run build && ./node_modules/.bin/firebase serve",
+    "install": "bower install",
+    "start": "yarn run build && firebase serve",
     "lint": "yarn run lint:javascript",
-    "lint:javascript": "./node_modules/.bin/eslint . --ext js,html --ignore-path .gitignore",
-    "test": "./node_modules/.bin/polymer test",
+    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "test": "polymer test",
     "test:integration": "yarn run build # test that psk builds without error with the CLI",
-    "build": "./node_modules/.bin/polymer build",
-    "deploy": "yarn run build && ./node_modules/.bin/firebase deploy --only hosting"
+    "build": "polymer build",
+    "deploy": "yarn run build && .firebase deploy --only hosting",
+    "watch": "npm-watch build"
+  },
+  "watch": {
+    "build": {
+      "patterns": [
+        "elements"
+      ],
+      "extensions": "html"
+    }
   }
 }

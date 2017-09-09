@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<dom-module id="passport-user-manager">
+  <template>
+    
+  </template>
+
+  <script>
+    /**
+     * `passport-topic-showcase`
+     * A utility element that handles user state
+     *
+     * @customElement
+     * @polymer
+     */
+    class PassportUserManager extends Polymer.Element {
+      static get is() { return 'passport-user-manager'; }
+      static get properties() {
+        return {
+          signedIn: Boolean
+        };
+      }
+    }
+
+    window.customElements.define(PassportUserManager.is, PassportUserManager);
+  </script>
+</dom-module>

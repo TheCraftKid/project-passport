@@ -1,0 +1,65 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+
+<link rel="import" href="passport-topic-showcase.html">
+
+<dom-module id="passport-home">
+  <template>
+    <style include="iron-flex">
+      div+span {
+        font-size: 24em;
+      }
+
+      #comingSoon {
+        margin: 16px;
+      }
+
+      .comingSoonSpan {
+        @apply --paper-font-title;
+      }
+    </style>
+
+    <div>
+      <div id="comingSoon" class="horizontal center-justified layout">
+        <span class="comingSoonSpan">Beta coming on September 24, 2017!</span>
+      </div>
+      <passport-topic-showcase topics="[[topics]]"></passport-topic-showcase>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `passport-home`
+     * A presenter for users not signed into Project Passport
+     *
+     * @customElement
+     * @polymer
+     */
+    class PassportHome extends Polymer.Element {
+      static get is() { return 'passport-home'; }
+      static get properties() {
+        return {
+          selectedTab: Number,
+          topics: {
+            type: Array,
+            value() {
+              return this.getNewestTopics();
+            },
+          }
+        };
+      }
+
+      getNewestTopics() {
+        // TODO: Fetch these from server
+        return [{
+          title: "AP US History",
+          description: "Mrs. Poole's AP US History from Period 1 to Period 5.",
+          longDescription: "This includes everything from colonization to the war in Iraq and Trump",
+        }];
+      }
+    }
+
+    window.customElements.define(PassportHome.is, PassportHome);
+  </script>
+</dom-module>

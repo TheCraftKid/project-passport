@@ -2,8 +2,13 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="passport-home.html">
+<link rel="import" href="passport-user-manager.html">
 
 <dom-module id="passport-app">
   <template>
@@ -31,15 +36,37 @@
           background-color: #B0BEC5;
         }
       }
+
+      paper-tabs {
+        background-color: #607D8B;
+        color: #fff;
+      }
+
+      passport-topic-showcase {
+        width: 100%;
+        background: #E0E0E0;
+      }
     </style>
+
+    <passport-user-manager signed-in="{{signedIn}}"></passport-user-manager>
 
     <app-header reveals>
       <app-toolbar>
         <paper-icon-button icon="menu" onclick="drawer.toggle()"></paper-icon-button>
         <div main-title>Project Passport</div>
+        <paper-button onclick="signIn()" hidden="[[signedIn]]">Sign in</paper-button>
       </app-toolbar>
+      <paper-tabs selected="{{selectedTab}}" scrollable>
+        <paper-tab>Topics</paper-tab>
+      </paper-tabs>
     </app-header>
-    <app-drawer id="drawer" swipe-open></app-drawer>
+
+    <main>
+      <passport-home></passport-home>
+    </main>
+
+    <app-drawer id="drawer" swipe-open>
+    </app-drawer>
   </template>
 
   <script>
@@ -54,7 +81,16 @@
       static get is() { return 'passport-app'; }
       static get properties() {
         return {
+          selectedTab: {
+            type: Number,
+            value: 0,
+          },
+          signedIn: Boolean,
         };
+      }
+
+      signIn() {
+        console.log('Launching sign-in flow');
       }
     }
 
